@@ -5,7 +5,8 @@ __date__ = '12 Aug 2020'
 import os, re
 import subprocess as sb
 from utils import error
-from settings import MMSEQ2_PATH, DIAMOND_PATH, DATABASES_PATH, UNIREF_VERSION, BOWTIE2_PATH
+
+UNIREF_VERSION = '201906'
 
 """
 Executes a command
@@ -35,9 +36,9 @@ Execute mmseq2.
 
 :param config: the mmseq2 params
 """
-def execute_mmseq2(config):    
+def execute_mmseq2(config):
     params = {
-        "program_name" : MMSEQ2_PATH+"mmseqs",
+        "program_name" : "mmseqs",
         "params" : config,
         "command_line" : "#program_name# #params#"
     }
@@ -48,7 +49,7 @@ def execute_mmseq2(config):
 Execute prokka.
 
 """
-def execute_prokka(input_file, outdir, prefix, nprocs=4):    
+def execute_prokka(input_file, outdir, prefix, nprocs=4):
     config = '--centre X --compliant --force'
     params = {
         "program_name" : "prokka",
@@ -67,7 +68,7 @@ def execute_prokka(input_file, outdir, prefix, nprocs=4):
 Execute uniref_annotator.
 
 """
-def execute_uniref_annotator(input_file, output, tmpdir, nprocs=4):  
+def execute_uniref_annotator(input_file, output, tmpdir, DATABASES_PATH, DIAMOND_PATH, nprocs=4):
     config = '--seqtype prot --diamond {} --uniref90db {}/UniRef90_{}.dmnd --uniref50db {}/UniRef50_{}.dmnd --diamond-options "--threads {}"'.format(DIAMOND_PATH, DATABASES_PATH, UNIREF_VERSION, DATABASES_PATH, UNIREF_VERSION, nprocs)
     params = {
         "program_name" : os.path.join(os.path.dirname(os.path.realpath(__file__)), 'uniref_annotator', 'uniref_annotator.py'),
@@ -77,7 +78,7 @@ def execute_uniref_annotator(input_file, output, tmpdir, nprocs=4):
         "params" : config,
         "command_line" : "#program_name# #output# #output_path# #params# #input#"
     }
-    execute(compose_command(params=params, input_file=input_file, output_path=tmpdir, 
+    execute(compose_command(params=params, input_file=input_file, output_path=tmpdir,
         output_file=output, nproc=nprocs))
 
 
@@ -94,8 +95,8 @@ def compress_tar_bz2(input, output_dir):
         "params" : "-cjf",
         "database" : "",
         "command_line" : "#program_name# #params# #output# #database# #input#"
-    }      
-    execute(compose_command(params, input_file=os.path.basename(input), 
+    }
+    execute(compose_command(params, input_file=os.path.basename(input),
         output_file=os.path.join(output_dir, os.path.basename(input) + ".tar.bz2"),
         database="--directory=" + output_dir))
     return os.path.join(output_dir, os.path.basename(input) + ".tar.bz2")
@@ -107,9 +108,9 @@ Execute bowtie2-build.
 :param input: the input fasta file(s)
 :param output: the output directory
 """
-def execute_bowtie2_build(input, output, nprocs):
+def execute_bowtie2_build(input, output, nprocs, BOWTIE2_PATH):
     params = {
-        "program_name" : BOWTIE2_PATH+"bowtie2-build",
+        "program_name" : "bowtie2-build",
         "params" : "--threads " + str(nprocs),
         "command_line" : "#program_name# #params# #input# #output#"
     }
@@ -122,9 +123,9 @@ Execute bowtie2-inspect.
 :param input: the input fasta file(s)
 :param output: the output directory
 """
-def execute_bowtie2_inspect(input):
+def execute_bowtie2_inspect(input, BOWTIE2_PATH):
     params = {
-        "program_name" : BOWTIE2_PATH+"bowtie2-inspect",
+        "program_name" : "bowtie2-inspect",
         "params" : "-n",
         "command_line" : "#program_name# #params# #input#"
     }
@@ -141,7 +142,7 @@ def compress_bz2(input):
     params = {
         "program_name" : "bzip2",
         "command_line" : "#program_name# #input#"
-    }      
+    }
     execute(compose_command(params, input_file=input))
 
 
