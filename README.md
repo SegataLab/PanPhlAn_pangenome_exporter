@@ -1,7 +1,7 @@
 ## UniRef genes families-level pangenome building and annotation
 
 This tools provides a pipeline for annotating and clustering input genomes sequences into UniRef90/UniRef50 genes families and clustering unknown coding sequences.
-The output provided is a ready-to-use PanPhlAn pangenome. Thus, it will countain all genomes contigs in a multi-FASTA file, precomputed bowtie2 indexes, and a pangenome tsv file mapping gene location on contigs.
+The output provided is a ready-to-use [PanPhlAn](https://github.com/SegataLab/panphlan) pangenome. Thus, it will countain all genomes contigs in a multi-FASTA file, precomputed bowtie2 indexes, and a pangenome tsv file mapping gene location on contigs.
 
 ### Pipeline
 
