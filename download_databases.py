@@ -13,9 +13,9 @@ from urllib.request import urlretrieve, urlcleanup
 from utils import info
 
 
-NR90_DMND = ["UniRef90_201906.dmnd.bz2", "https://www.dropbox.com/sh/9dibjl6su9hhtt4/AAAHHpnORKbghxCtWjNEzmfqa/UniRef90_201906.dmnd.bz2?dl=1"]
-NR50_DMND = ["UniRef50_201906.dmnd.bz2", "https://www.dropbox.com/sh/9dibjl6su9hhtt4/AABlE7s_-ZYJh_YoHvBIHroda/UniRef50_201906.dmnd.bz2?dl=1"]
-MAP_90_TO_50 = ["UniRef90to50_201906.tsv.bz2", "https://www.dropbox.com/sh/9dibjl6su9hhtt4/AABqpu69OPMeBQcSJHphbT9Ia/UniRef90to50_201906.tsv.bz2?dl=1"]
+NR90_DMND = ["UniRef90_201906.dmnd.bz2", "http://cmprod1.cibio.unitn.it/databases/PanPhlAn/UniRef90_201906.dmnd"]
+NR50_DMND = ["UniRef50_201906.dmnd.bz2", "http://cmprod1.cibio.unitn.it/databases/PanPhlAn/UniRef50_201906.dmnd"]
+MAP_90_TO_50 = ["UniRef90to50_201906.tsv.bz2", "http://cmprod1.cibio.unitn.it/databases/PanPhlAn/UniRef90to50_201906.tsv"]
 
 # ------------------------------------------------------------------------------
 """
