@@ -433,7 +433,8 @@ def write_panphlan_tsv(inputdir, tmp_dir, ppa_outdir, clade_name, contigs_names_
                 feature = str(f.location)
                 init = int(feature.split(':')[0].split('[')[1])
                 end = int(feature.split(':')[1].split(']')[0])
-                OUT_TSV.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(f.qualifiers['UniRef90'][0], name, genome_id, contig_id, init, end))
+                strand = str(feature.split(':')[1].split(']')[1][1])
+                OUT_TSV.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(f.qualifiers['UniRef90'][0], name, genome_id, contig_id, init, end, strand))
     OUT_TSV.close()
 
 
